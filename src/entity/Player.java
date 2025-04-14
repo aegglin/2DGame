@@ -4,6 +4,7 @@ import main.GamePanel;
 import main.KeyHandler;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOError;
 import java.io.IOException;
@@ -27,6 +28,13 @@ public class Player extends Entity{
         // returns the halfway point of the screen
         screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
         screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
+
+        solidArea = new Rectangle();
+        // Keeping in mind the tileSize is 48 x 48
+        solidArea.x = 8;
+        solidArea.y = 16;
+        solidArea.width = 32;
+        solidArea.height = 32;
 
         setDefaultValues();
         getPlayerImage();
@@ -60,21 +68,39 @@ public class Player extends Entity{
         if (keyHandler.upPressed|| keyHandler.downPressed || keyHandler.leftPressed || keyHandler.rightPressed) {
             if (keyHandler.upPressed) {
                 direction = "up";
-                worldY -= speed;
             }
             else if (keyHandler.downPressed) {
                 direction = "down";
-                worldY += speed;
             }
             else if (keyHandler.leftPressed) {
                 direction = "left";
-                worldX -= speed;
             }
             else if (keyHandler.rightPressed) {
                 direction = "right";
-                worldX += speed;
             }
+
+            // Check tile collision
+            collisionOn = false;
+            gp.collisionChecker.checkTile(this);
     
+            // If collision isi false, player can move
+            if (!collisionOn) {
+                switch (direction) {
+                    case "up":
+                        worldY -= speed;
+                        break;
+                    case "down":
+                        worldY += speed;
+                        break;
+                    case "left":
+                        worldX -= speed;
+                        break;
+                    case "right":
+                        worldX += speed;
+                        break;
+                }
+            }
+
             spriteCounter++;
             // Update is called 60x per second (inside game loop)
             if (spriteCounter > 15) {
