@@ -1,6 +1,7 @@
 package main;
 
 import entity.Player;
+import gameobject.SuperObject;
 import tile.TileManager;
 
 import java.lang.Thread;
@@ -37,6 +38,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public Player player = new Player(this, keyHandler);
     public CollisionChecker collisionChecker = new CollisionChecker(this);
+    public SuperObject obj[] = new SuperObject[10]; //can display up to 10 objects at the same time
+    public AssetSetter assetSetter = new AssetSetter(this);
 
     public GamePanel() {
         // JPanel methods
@@ -45,6 +48,10 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true); // better rendering performance
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
+    }
+
+    public void setupGame() {
+        assetSetter.setObject();
     }
 
     public void startGameThread() {
