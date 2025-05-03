@@ -1,10 +1,7 @@
 package tile;
 
 import java.awt.Graphics2D;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 
 import javax.imageio.ImageIO;
 
@@ -20,14 +17,14 @@ public class TileManager {
         tile = new Tile[10];
         mapTileNumber = new int[gp.maxWorldCol][gp.maxWorldRow];
 
-        getTileImage();
-        loadMap("/res/maps/world01.txt");
+        getTileImages();
+        loadMap("2DGame/res/maps/world01.txt");
     }
 
     public void loadMap(String filePath) {
         try {
-            InputStream is = getClass().getResourceAsStream(filePath);
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            File mapFile = new File(filePath);
+            BufferedReader br = new BufferedReader(new FileReader(mapFile));
 
             int col = 0;
             int row = 0;
@@ -51,28 +48,30 @@ public class TileManager {
         }
     }
 
-    public void getTileImage() {
+    public void getTileImages() {
         try {
             tile[0] = new Tile();
-            tile[0].image = ImageIO.read(getClass().getResourceAsStream("/res/tiles/grass.png"));
+            File grassFile = new File("2DGame/res/tiles/grass.png");
+            System.out.println(grassFile.getAbsolutePath());
+            tile[0].image = ImageIO.read(grassFile);
 
             tile[1] = new Tile();
-            tile[1].image = ImageIO.read(getClass().getResourceAsStream("/res/tiles/wall.png"));
+            tile[1].image = ImageIO.read(new File("2DGame/res/player/wall.png"));
             tile[1].collision = true;
 
             tile[2] = new Tile();
-            tile[2].image = ImageIO.read(getClass().getResourceAsStream("/res/tiles/water.png"));
+            tile[2].image = ImageIO.read(new File("2DGame/res/player/water.png"));
             tile[2].collision = true;
 
             tile[3] = new Tile();
-            tile[3].image = ImageIO.read(getClass().getResourceAsStream("/res/tiles/earth.png"));
+            tile[3].image = ImageIO.read(new File("2DGame/res/player/earth.png"));
 
             tile[4] = new Tile();
-            tile[4].image = ImageIO.read(getClass().getResourceAsStream("/res/tiles/tree.png"));
+            tile[4].image = ImageIO.read(new File("2DGame/res/player/tree.png"));
             tile[4].collision = true;
 
             tile[5] = new Tile();
-            tile[5].image = ImageIO.read(getClass().getResourceAsStream("/res/tiles/sand.png"));
+            tile[5].image = ImageIO.read(new File("2DGame/res/player/sand.png"));
 
         } catch (IOException e) {
             e.printStackTrace();
