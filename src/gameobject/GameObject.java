@@ -5,11 +5,14 @@ import main.GamePanel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class SuperObject {
+public class GameObject {
     public BufferedImage image;
     public String name;
     public boolean collision = false;
     public int worldX, worldY;
+    public Rectangle gameObjectCollisionArea = new Rectangle(0, 0, 48, 48);
+    public int gameObjectDefaultX = 0;
+    public int gameObjectDefaultY = 0;
 
     public void draw(Graphics2D g2d, GamePanel gp) {
         int screenX = worldX - gp.player.worldX + gp.player.screenX;

@@ -1,7 +1,7 @@
 package main;
 
 import entity.Player;
-import gameobject.SuperObject;
+import gameobject.GameObject;
 import tile.TileManager;
 
 import java.lang.Thread;
@@ -38,7 +38,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public Player player = new Player(this, keyHandler);
     public CollisionChecker collisionChecker = new CollisionChecker(this);
-    public SuperObject[] obj = new SuperObject[10]; //can display up to 10 objects at the same time
+    public GameObject[] gameObjects = new GameObject[10]; //can display up to 10 objects at the same time
     public AssetSetter assetSetter = new AssetSetter(this);
 
     public GamePanel() {
@@ -121,9 +121,9 @@ public class GamePanel extends JPanel implements Runnable {
 
         tileManager.draw(g2d);
 
-        for (int i = 0; i < obj.length; i++) {
-            if (obj[i] != null) {
-                obj[i].draw(g2d, this);
+        for (int i = 0; i < gameObjects.length; i++) {
+            if (gameObjects[i] != null) {
+                gameObjects[i].draw(g2d, this);
             }
         }
 
