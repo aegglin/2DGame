@@ -19,7 +19,7 @@ public class GamePanel extends JPanel implements Runnable {
     private final int scale = 3; // used for scaling for higher resolution monitors
 
     public final int tileSize = originalTileSize * scale; // 48 x 48 tile
-    public  final int maxScreenCol = 16;
+    public final int maxScreenCol = 16;
     public final int maxScreenRow = 12;
     public final int screenWidth = tileSize * maxScreenCol; // 768 pixels
     public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
@@ -30,7 +30,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int worldWidth = tileSize * maxWorldCol;
     public final int worldHeight = tileSize * maxWorldRow;
 
-    private int fps = 60;
+    private final int fps = 60;
 
     public TileManager tileManager = new TileManager(this);
     private KeyHandler keyHandler = new KeyHandler();
@@ -128,8 +128,6 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         player.draw(g2d);
-
-
         g2d.dispose(); // Not strictly necessary
     }
 }

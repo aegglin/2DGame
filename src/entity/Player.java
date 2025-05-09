@@ -12,7 +12,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 
-
 public class Player extends Entity{
     private GamePanel gp;
     private KeyHandler keyHandler;
